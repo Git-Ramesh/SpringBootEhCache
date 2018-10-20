@@ -1,0 +1,57 @@
+#Server Configuration
+server:
+  port: 4014
+#DataSource Configguration
+spring:
+  datasource:
+    type: org.apache.tomcat.jdbc.pool.DataSource
+    username: postgres
+    password: radiant
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://127.0.0.1/spring_boot_cache
+    tomcat:
+      max-active: 10
+      max-age: 10000
+      min-idle: 2
+      max-idle: 3
+      max-wait: 30000
+      initial-size: 2
+    initialization-mode: never
+    schema: classpath:schema.sql
+    data: classpath:data.sql
+#JPA Configuration
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database: postgresql
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+      hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+      hibernate.jdbc.lob.non_contextual_creation: true
+#Cache Configuration(Internally it configures the CacheManager_
+  cache:
+    cache-names:
+    - usersCache
+    type: ehcache
+    ehcache:
+      config: classpath:ehcache.xml
+#metrics configurations
+management: 
+  endpoints: 
+    web: 
+      exposure:
+        include: '*'
+  metrics:
+    export:
+      atlas:
+        enabled: true
+      prometheus:
+        enabled: true
+  endpoint:
+    metrics:
+      enabled: true
+
+
+
+
