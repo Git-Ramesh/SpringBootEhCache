@@ -1,5 +1,7 @@
 package com.rs.app.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -44,5 +46,10 @@ public class UsersController {
 	public ResponseEntity<Void> deleteUsers(@PathVariable("id") long id) {
 		this.usersService.deleteUsers(id);
 		return ResponseEntity.noContent().build();
+	}
+
+	@GetMapping("/all")
+	public List<Users> allUsers() {
+		return this.usersService.getAllUsers();
 	}
 }

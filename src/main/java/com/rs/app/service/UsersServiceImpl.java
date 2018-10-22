@@ -50,10 +50,11 @@ public class UsersServiceImpl implements UsersService {
 	@Override
 	@CacheEvict(value = "usersCache", key = "#id")
 	public void deleteUsers(long id) {
-		 this.usersRepo.deleteById(id);
+		this.usersRepo.deleteById(id);
 	}
 
 	@Override
+	@Cacheable(value = "usersCache", key = "#root.method.name")
 	public List<Users> getAllUsers() {
 		return this.usersRepo.findAll();
 	}
