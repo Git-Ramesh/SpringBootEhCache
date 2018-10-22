@@ -4,9 +4,15 @@
 	updateCheck="true" monitoring="autodetect" dynamicConfig="true">
 	<diskStore path="java.io.tmpdir" />
 	<cache name="usersCache" 
-				maxElementsInMemory="300"
-				eternal="false" 
-				timeToIdleSeconds="30"
-				timeToLiveSeconds="120"
-				overflowToDisk="true" />
+			maxEntriesLocalHeap="1000"
+			maxEntriesLocalDisk="1000"
+			eternal="false"
+			diskSpoolBufferSizeMB="20"
+			timeToIdleSeconds="300" 
+			timeToLiveSeconds="600"
+			memoryStoreEvictionPolicy="LFU"
+			transactionalMode="off"
+			statistics="true">
+		<persistence strategy="localTempSwap" />
+	</cache>
 </ehcache>

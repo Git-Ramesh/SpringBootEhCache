@@ -1,9 +1,11 @@
 package com.rs.app.config;
 
 import org.springframework.cache.CacheManager;
-import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
+import org.springframework.cache.ehcache.EhCacheCacheManager;
+import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
 
 /**
  * @author ramesh
@@ -11,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
  * @since 2018-10-20
  */
 @Configuration
-public class CacheConfig {
+public class EhCacheConfig {
 	
 	/**
 	 * <p>
@@ -28,4 +30,16 @@ public class CacheConfig {
 //	public CacheManager cacheManager() {
 //		return new ConcurrentMapCacheManager("usersCache");
 //	}
+	@Bean
+	public CacheManager cacheManager() {
+		return new EhCacheCacheManager(ehCacheManagerFactoryBean().getObject());
+	}
+
+	@Bean
+	public EhCacheManagerFactoryBean ehCacheManagerFactoryBean() {
+		EhCacheManagerFactoryBean factoryBean = new EhCacheManagerFactoryBean();
+		factoryBean.setConfigLocation(new ClassPathResource("ehcache.xml"));
+		factoryBean.setShared(true);
+		return factoryBean;
+	}
 }

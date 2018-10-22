@@ -30,12 +30,12 @@ spring:
       hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
       hibernate.jdbc.lob.non_contextual_creation: true
 #Cache Configuration(Internally it configures the CacheManager_
-  cache:
-    cache-names:
-    - usersCache
-    type: ehcache
-    ehcache:
-      config: classpath:ehcache.xml
+#  cache:
+#    cache-names:
+#    - usersCache
+#    type: ehcache
+#    ehcache:
+#      config: classpath:ehcache.xml
 #metrics configurations
 management: 
   endpoints: 
